@@ -35,7 +35,7 @@ service 'chronyd' do
 end
 
 timezone 'config-timezone' do
-  timezone 'Asia/Singapore'
+  timezone '_ZIMBRA_TIMEZONE'
 end
 
 execute 'config-time-sync' do
@@ -48,7 +48,7 @@ service 'chronyd' do
 end
 
 hostname 'config-hostname' do
-  hostname 'mail.example.com'
+  hostname '_ZIMBRA_FQDN'
 end
 
 ohai 'reload' do
