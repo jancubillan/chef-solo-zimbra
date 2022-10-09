@@ -137,13 +137,6 @@ execute 'set-trusted-ip' do
   user 'zimbra'
 end
 
-execute 'restart-zimbra' do
-  command './zmcontrol restart'
-  cwd '/opt/zimbra/bin'
-  user 'zimbra'
-  ignore_failure true
-end
-
 package 'epel-release' do
   action :install
 end
