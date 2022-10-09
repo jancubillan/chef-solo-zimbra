@@ -1,0 +1,11 @@
+chef-solo.log
+checksums
+data_bags
+environments
+backup
+cache
+roles
+sandbox
+syntax_check_cache
+chef_guid
+nodes
