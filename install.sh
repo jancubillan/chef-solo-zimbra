@@ -54,7 +54,6 @@ if [[ -d /opt/zimbra ]]; then
 fi
 
 echo ""
-read -rp "What is the domain name? [example.com] " ZIMBRA_DOMAIN
 read -rp "What is the admin password? [zimbra4ever] " ZIMBRA_ADMIN_PASSWORD
 read -rp "What is the fully qualified domain name? [mail.example.com] " ZIMBRA_FQDN
 read -rp "What is the Timezone? [Asia/Singapore] " ZIMBRA_TIMEZONE
@@ -62,7 +61,6 @@ read -rp "What is the Timezone? [Asia/Singapore] " ZIMBRA_TIMEZONE
 echo ""
 echo "Here are the details"
 echo ""
-echo "Zimbra Domain: ${ZIMBRA_DOMAIN:-example.com}"
 echo "Zimbra Administrator Password: ${ZIMBRA_ADMIN_PASSWORD:-zimbra4ever}"
 echo "Zimbra Fully Qualified Domain Name: ${ZIMBRA_FQDN:-mail.example.com}"
 echo "Zimbra Timezone: ${ZIMBRA_TIMEZONE:-Asia/Singapore}"
@@ -91,9 +89,7 @@ ZIMBRA_RANDOM_CHARS_2=$(date | md5sum | cut -c 1-14)
 cp -v "${ZIMBRA_CONFIG_DEFAULT}" "${ZIMBRA_CONFIG_TEMPLATE}"
 cp -v "${ZIMBRA_RECIPE_DEFAULT}" "${ZIMBRA_RECIPE}"
 
-sed -i "s|_ZIMBRA_DOMAIN|${ZIMBRA_DOMAIN:-example.com}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
 sed -i "s|_ZIMBRA_ADMIN_PASSWORD|${ZIMBRA_ADMIN_PASSWORD:-zimbra4ever}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
-sed -i "s|_ZIMBRA_FQDN|${ZIMBRA_FQDN:-mail.example.com}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
 sed -i "s|_ZIMBRA_FQDN|${ZIMBRA_FQDN:-mail.example.com}|g" "${ZIMBRA_RECIPE}"
 sed -i "s|_ZIMBRA_MAILBOXD_MEMORY|${ZIMBRA_MAILBOXD_MEMORY}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
 sed -i "s|_ZIMBRA_SYSTEM_MEMORY|${ZIMBRA_SYSTEM_MEMORY}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
