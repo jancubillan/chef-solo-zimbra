@@ -86,9 +86,12 @@ ZIMBRA_RANDOM_CHARS_1=$(date | md5sum | cut -c 1-9)
 sleep 3
 ZIMBRA_RANDOM_CHARS_2=$(date | md5sum | cut -c 1-14)
 
+ZIMBRA_SUBNET_PREFIX=$(ip a | awk '!/inet6/' | awk '/\/[0-9][0-9]/{print $2}' | awk -F'/' 'NR==1{print $2}')
+
 cp -v "${ZIMBRA_CONFIG_DEFAULT}" "${ZIMBRA_CONFIG_TEMPLATE}"
 cp -v "${ZIMBRA_RECIPE_DEFAULT}" "${ZIMBRA_RECIPE}"
 
+sed -i "s|_ZIMBRA_SUBNET_PREFIX|${ZIMBRA_SUBNET_PREFIX}|g" "${ZIMBRA_RECIPE}"
 sed -i "s|_ZIMBRA_ADMIN_PASSWORD|${ZIMBRA_ADMIN_PASSWORD:-zimbra4ever}|g" "${ZIMBRA_CONFIG_TEMPLATE}"
 sed -i "s|_ZIMBRA_FQDN|${ZIMBRA_FQDN:-mail.example.com}|g" "${ZIMBRA_RECIPE}"
 sed -i "s|_ZIMBRA_MAILBOXD_MEMORY|${ZIMBRA_MAILBOXD_MEMORY}|g" "${ZIMBRA_CONFIG_TEMPLATE}"

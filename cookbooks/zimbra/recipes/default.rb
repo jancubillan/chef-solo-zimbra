@@ -1,6 +1,6 @@
 execute 'config-static-network' do
   command <<-EOF
-    nmcli con mod #{node['network']['default_interface']} ipv4.method manual ipv4.addresses #{node['ipaddress']}/24 ipv4.gateway #{node['network']['default_gateway']}
+    nmcli con mod #{node['network']['default_interface']} ipv4.method manual ipv4.addresses #{node['ipaddress']}/_ZIMBRA_SUBNET_PREFIX ipv4.gateway #{node['network']['default_gateway']}
     nmcli con mod #{node['network']['default_interface']} ipv4.dns "8.8.8.8 8.8.4.4"
     nmcli con reload
     nmcli con up #{node['network']['default_interface']}
